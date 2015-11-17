@@ -24,7 +24,13 @@ fi
 
 git clone https://github.com/puppetlabs/cpp-pcp-client
 cd cpp-pcp-client
-git checkout 1.0.1
+
+if [ ${TRAVIS_BRANCH} == master ]; then
+  git checkout master
+else
+  git checkout 1.0.1
+fi
+
 git submodule update --init --recursive
 cmake -DCMAKE_INSTALL_PREFIX=$USERDIR .
 make install -j2
